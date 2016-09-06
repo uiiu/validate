@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>validate-表单验证</title>
+	<link rel="stylesheet" href="css/base.css" />
+</head>
+<body>
+	
+	<form action="#" method="post" id="regForm">
+    <fieldset>
+        <legend>jquery-validate表单校验验证</legend>
+        <!-- 用户名 -->
+        <div class="item">
+            <label for="username" class="item-label">用户名:</label>
+            <input type="text" id="username" name="username" class="item-text" placeholder="设置用户名"
+            autocomplete="off" tip="请输入用户名">
+        </div>
+        <!-- 密码 -->
+        <div class="item">
+            <label for="password" class="item-label">密码:</label>
+            <input type="password" id="password" name="password" class="item-text" placeholder="设置密码"
+            tip="6-18个字符，字母开头">
+        </div>
+        <!-- 确认密码 -->
+        <div class="item">
+            <label for="password" class="item-label">确认密码:</label>
+            <input type="password" name="repassword" class="item-text" placeholder="设置确认密码">
+        </div>
+        <!-- 邮箱 -->
+         <div class="item">
+            <label for="email" class="item-label">邮箱:</label>
+            <input type="text" name="email" class="item-text" placeholder="设置邮箱" tip="请输入邮箱">
+        </div>
+        <!-- 年龄 -->
+         <div class="item">
+            <label for="age" class="item-label">年龄:</label>
+            <input type="text" name="age" class="item-text" placeholder="请输入年龄" tip="请输入年龄">
+        </div>
+		<!-- 邮政编码 -->
+         <div class="item">
+            <label for="zipcode" class="item-label">邮政编码:</label>
+            <input type="text" name="zipcode" class="item-text" placeholder="设置邮政编码" tip="非必填项">
+        </div>
+        <!-- 金额 -->
+        <div class="item">
+            <label for="amt" class="item-label">金额:</label>
+            <input type="text" id="amt" name="amt" class="item-text" placeholder="交易金额"
+            tip="交易金额必须大于0，且最多有两位小数">
+        </div>
+        <div class="item">
+            <input type="submit" value="提交" class="item-submit">
+        </div>
+    </fieldset>
+</form>
+
+
+</body>
+
+<script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"></script>
+<script src="js/jquery.validate.extend.js"></script>
+<script>
+$(document).ready(function(){
+    $("#regForm").validate({
+        rules: {
+            username:{
+                required: true,
+                minlength: 2
+            },
+            password:{
+                required: true,
+                minlength: 6,
+                maxlength: 18,
+                pwdCheck: true
+            },
+            repassword:{
+                required: true,
+                equalTo: "#password"
+            },
+            email: {
+            	required: true,
+            	emailCheck: true
+            },
+            age:{
+            	required: true,
+              	ageCheck: true
+            },
+            zipcode:{
+                minlength: 5,
+              	isZipCode: true
+            },
+            amt: {
+                required: true,
+                amtCheck: true
+            }
+        },
+        messages:{
+            username:{
+                required: "用户名不能为空",
+                minlength: "用户名的最小长度为2"
+            },
+            password:{
+                required: "密码不能为空",
+                minlength: "密码长度不能少于6个字符",
+                maxlength: "密码长度不能超过18个字符"
+            },
+            repassword:{
+                required: "确认密码不能为空",
+                equalTo: "确认密码和密码不一致"
+            },
+            email:{
+                required: "邮箱不能为空",            
+            },
+            age:{
+                required: "年龄不能为空",            
+            },
+            zipcode:{
+                minlength: "邮政编码的最小长度为6"
+            },
+            amt: {
+                required: "金额不能为空"
+            }
+        }
+    });
+
+
+});
+</script>
+</html>
